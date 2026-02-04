@@ -1,17 +1,16 @@
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 int helper(vector<int> &skill, vector<int> &time, int t, int idx, int k) {
-    if(k == 0 && idx >= skill.size()){
-        return 0;
-    }
+    if(t < 0 || k < 0 || (idx >= skill.size() && k > 0)) return -1e9;
+    if(k == 0) return 0;
     int gain = 0;
-    for(int i = idx; i < skill.size(); i++) {
-        if(t - time[i] >= 0)
-        gain = max(gain, helper(skill, time, t - time[i], i + 1, k - 1) + skill[i]);
-        gain = max(gain, helper(skill, time, t, i + 1, k));
-    }
+    
+    gain = max(gain, helper(skill, time, t - time[idx], idx + 1, k - 1) + skill[idx]);
+    gain = max(gain, helper(skill, time, t, idx + 1, k));
+    
     return gain;
 }
 
