@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-int longestCommonSubstring(string s1, string s2) {
+int longestCommonSubstring(string &s1, string &s2) {
     int n = s1.size();
     int m = s2.size();
 
